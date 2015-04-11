@@ -1,0 +1,16 @@
+$FLJ
+.NAM Math_Test
+.DAT 2
+$DAT
+the number of the fluff is#
+$090
+*10
+ffff
+1
+$FLC
+L190
+A190
+S191
+L192
+OP91
+HALT

@@ -1,0 +1,7 @@
+bin
+*.class
+flog.log.*
+flog.*
+flog.log
+/build/
+/logs/

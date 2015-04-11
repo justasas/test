@@ -1,0 +1,13 @@
+$FLJ
+.NAM Input_Test
+.DAT 2
+$DAT
+$090
+*2
+$FLC
+L190
+IN80
+L190
+OP80
+HALT
+$END

@@ -1,0 +1,15 @@
+$FLJ
+.NAM Demo
+.DAT 2
+$DAT
+/Rasom nuo 080
+*5
+*0
+$FLC
+/Nuo 000
+L181
+C180
+JE05
+INC1
+JP01
+HALT

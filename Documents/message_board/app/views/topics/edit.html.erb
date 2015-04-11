@@ -1,0 +1,28 @@
+<h1>Editing topic</h1>
+
+<% if (!flash[:error]) %>
+<%= form_for :topic, url: topic_path(@topic), method: :patch do |f| %>
+  <% if @topic.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@topic.errors.count, "error") %> prohibited
+      this topic from being saved:</h2>
+    <ul>
+    <% @topic.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<% else %>
+<%= flash[:error] %>
+<% end %>
+<%= link_to 'Back', topics_path %>

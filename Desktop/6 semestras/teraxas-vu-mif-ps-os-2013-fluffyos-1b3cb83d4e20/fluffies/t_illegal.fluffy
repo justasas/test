@@ -1,0 +1,17 @@
+// Programa neveikia - yra klaidu
+// Illegal argument testas
+$FLJ
+.NAM Demo
+.DAT 2
+$DAT
+*81
+*84
+*5000
+$090
+Rezultatas#
+// Čia prasideda kodas :)
+$FLC
+z280
+INC2
+HALT
+$END

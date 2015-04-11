@@ -1,0 +1,18 @@
+$FLJ
+.NAM Output_Test
+.DAT 2
+$DAT
+the number of the fluff#
+$090
+*666
+*1
+*2
+$FLC
+/Nustatom tipa ir isvedam skaiciu
+L191
+OP90
+/Nustatom tipa ir isvedam eilute
+L192
+OP80
+HALT
+$END
