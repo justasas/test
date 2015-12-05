@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings theme="METRO" jaxb-support="false" id="_144814298348513" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" xmlns:ns4="http://nbmodeler.java.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <jpa:entity class="Komentaras" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1448143013829">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814317089920">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+            <jpa:basic name="turinys" attribute-type="String" visibile="true" id="_144814337743832">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="vartotojas_id" target-entity="Vartotojas" optional="true" primaryKey="true" connected-entity-id="_1448143179081" visibile="true" id="_144818537734346">
+                <jpa:join-table/>
+            </jpa:many-to-one>
+            <jpa:many-to-one name="serija_id" target-entity="Serijos-subdocument" optional="true" primaryKey="true" connected-entity-id="_1448143199033" visibile="true" id="_144818538738047">
+                <jpa:join-table/>
+                <jpa:cascade>
+                    <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:many-to-one>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Žanrai-subdocument" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1448143122623">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_144818471473441">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+            <jpa:basic name="pavadinimas" attribute-type="String" visibile="true" id="_144814329964631">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Vartotojas" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1448143179081">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814324007629">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+            <jpa:basic name="vart_vardas" attribute-type="String" visibile="true" id="_144818591860050">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="paštas" attribute-type="String" visibile="true" id="_144818592503651">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="slaptažodis" attribute-type="String" visibile="true" id="_144818592554452">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="vardas" attribute-type="String" visibile="true" id="_144818592599053">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="pavardė" attribute-type="String" visibile="true" id="_144818592622654">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Serialas" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1448143188787">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814322462526">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+            <jpa:basic name="pavadinimas" attribute-type="String" visibile="true" id="_144814339938333">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="išleista" attribute-type="java.sql.Date" visibile="true" id="_144814341385334">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255"/>
+            </jpa:basic>
+            <jpa:basic name="serijos:subdocument" attribute-type="String" visibile="true" id="_1448203539503104">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="žanrai:subdocument" attribute-type="String" visibile="true" id="_1448204090318105">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Serijos-subdocument" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1448143199033">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814322830527">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+            <jpa:basic name="aprašymas" attribute-type="String" visibile="true" id="_144814345927435">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="įvertinimas" attribute-type="float" visibile="true" id="_144814346159036">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="pavadinimas" attribute-type="String" visibile="true" id="_144814346213537">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Mėgstamiausi" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1448143209918">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814323446628">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value/>
+            </jpa:id>
+            <jpa:many-to-one name="vartotojas_id" target-entity="Vartotojas" optional="true" primaryKey="true" connected-entity-id="_1448143179081" visibile="true" id="_144818517183144">
+                <jpa:join-table/>
+                <jpa:cascade>
+                    <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:many-to-one>
+            <jpa:many-to-one name="serialas_id" target-entity="Serialas" optional="true" primaryKey="true" connected-entity-id="_1448143188787" visibile="true" id="_144819656944088">
+                <jpa:join-table/>
+                <jpa:cascade>
+                    <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:many-to-one>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:diagram id="_144814298348514">
+        <plane elementRef="_144814298348513" id="_144814298348515_p">
+            <shape elementRef="_1448143013829" id="_1448143013829_gui">
+                <Bounds x="152.0" y="-145.0" width="178.0" height="138.0"/>
+            </shape>
+            <shape elementRef="_1448143122623" id="_1448143122623_gui">
+                <Bounds x="429.0" y="-93.0" width="240.0" height="86.0"/>
+            </shape>
+            <shape elementRef="_1448143179081" id="_1448143179081_gui">
+                <Bounds x="40.0" y="82.0" width="167.0" height="166.0"/>
+            </shape>
+            <shape elementRef="_1448143188787" id="_1448143188787_gui">
+                <Bounds x="509.0" y="82.0" width="181.0" height="146.0"/>
+            </shape>
+            <shape elementRef="_1448143199033" id="_1448143199033_gui">
+                <Bounds x="242.0" y="30.0" width="242.0" height="126.0"/>
+            </shape>
+            <shape elementRef="_1448143209918" id="_1448143209918_gui">
+                <Bounds x="268.0" y="206.0" width="191.0" height="106.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>
