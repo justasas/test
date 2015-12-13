@@ -14,18 +14,23 @@
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="slaptazodis"/>
       <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
-      <property name="javax.persistence.schema-generation.scripts.create-target" value="file:/tmp/create.sql"/>
-      <property name="javax.persistence.schema-generation.scripts.drop-target" value="file:/tmp/drop.sql"/>
+      <property name="javax.persistence.schema-generation.scripts.create-target" value="file:/home/unknown/Desktop/7 semestras/projektinis darbas/postgre/create.sql"/>
+      <property name="javax.persistence.schema-generation.scripts.drop-target" value="file:/home/unknown/Desktop/7 semestras/projektinis darbas/postgre/drop.sql"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="DEFAULT_PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>orm.Serialas</class>
+    <!--<class>orm.Serialas</class>
     <class>orm.Megstamiausias</class>
     <class>orm.Vartotojas</class>
     <class>orm.Komentaras</class>
-    <class>orm.Serija</class>
+    <class>orm.Serija</class>-->
     <class>orm.Zanras</class>
+    <class>orm.Komentaras</class>
+    <class>orm.Vartotojas</class>
+    <class>orm.Serialas</class>
+    <class>orm.Serija</class>
+    <class>orm.Megstamiausias</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
       <property name="javax.persistence.jdbc.password" value="app"/>

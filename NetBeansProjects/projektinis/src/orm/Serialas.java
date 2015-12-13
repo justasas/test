@@ -1,6 +1,5 @@
 package orm;
 
-
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
@@ -19,17 +18,17 @@ public class Serialas implements Serializable {
     @Basic
     private Date išleista;
 
-    @OneToMany(cascade = {CascadeType.ALL}, targetEntity = Serija.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, targetEntity = Serija.class, mappedBy = "serialas")
     private Collection<Serija> serijos;
 
     @Basic
     private String pavadinimas;
 
-    @OneToMany(cascade = {CascadeType.ALL}, targetEntity = Zanras.class)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, targetEntity = Zanras.class, mappedBy = "serialas")
     private Collection<Zanras> zanrai;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Serialas() {
@@ -74,5 +73,5 @@ public class Serialas implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
+    }  
 }

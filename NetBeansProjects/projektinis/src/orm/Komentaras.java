@@ -1,9 +1,9 @@
 package orm;
 
-
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,12 +17,15 @@ public class Komentaras implements Serializable {
     @Basic
     private String turinys;
 
+    @ManyToOne(cascade = {CascadeType.ALL}, targetEntity = Serija.class)
+    private Serija serija;
+
+    @Column(nullable = false)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Id
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, targetEntity = Vartotojas.class)
+    @ManyToOne(cascade = {CascadeType.ALL}, targetEntity = Vartotojas.class)
     private Vartotojas vartotojas;
 
     public Komentaras() {
@@ -35,6 +38,14 @@ public class Komentaras implements Serializable {
 
     public void setTurinys(String turinys) {
         this.turinys = turinys;
+    }
+
+    public Serija getSerija() {
+        return this.serija;
+    }
+
+    public void setSerija(Serija serija) {
+        this.serija = serija;
     }
 
     public Long getId() {

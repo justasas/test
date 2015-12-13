@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <jpa:entity-mappings theme="METRO" jaxb-support="false" id="_144814298348513" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" xmlns:ns4="http://nbmodeler.java.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <jpa:package>orm</jpa:package>
     <jpa:entity jaxb-root-element="false" static-metamodel="false" abstract="true" class="Komentaras" visibile="true" minimized="false" id="_1448143013829">
         <jpa:attributes>
             <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814317089920">
-                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
-                <jpa:generated-value strategy="AUTO"/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                <jpa:generated-value strategy="IDENTITY"/>
             </jpa:id>
             <jpa:basic name="turinys" attribute-type="String" visibile="true" id="_144814337743832">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
             </jpa:basic>
-            <jpa:many-to-one name="vartotojas" target-entity="Vartotojas" optional="true" primaryKey="true" connected-entity-id="_1448143179081" visibile="true" id="_144818537734346">
+            <jpa:many-to-one name="vartotojas" target-entity="Vartotojas" optional="true" primaryKey="false" connected-entity-id="_1448143179081" connected-attribute-id="_144939378633617" visibile="true" id="_144939378633116">
                 <jpa:join-table/>
                 <jpa:cascade>
-                    <jpa:cascade-persist/>
-                    <jpa:cascade-merge/>
-                    <jpa:cascade-refresh/>
+                    <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:many-to-one>
+            <jpa:many-to-one name="serija" target-entity="Serija" optional="true" primaryKey="false" connected-entity-id="_1448143199033" connected-attribute-id="_144939380230019" visibile="true" id="_144939380229618">
+                <jpa:join-table/>
+                <jpa:cascade>
+                    <jpa:cascade-all/>
                 </jpa:cascade>
             </jpa:many-to-one>
         </jpa:attributes>
@@ -23,18 +28,24 @@
         <jpa:attributes>
             <jpa:id name="id" attribute-type="Long" visibile="true" id="_144818471473441">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
-                <jpa:generated-value strategy="AUTO"/>
+                <jpa:generated-value strategy="IDENTITY"/>
             </jpa:id>
             <jpa:basic name="pavadinimas" attribute-type="String" visibile="true" id="_144814329964631">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
             </jpa:basic>
+            <jpa:many-to-one name="serialas" target-entity="Serialas" optional="false" primaryKey="false" connected-entity-id="_1448143188787" connected-attribute-id="_144939403139128" visibile="true" id="_144939403139027">
+                <jpa:join-table/>
+                <jpa:cascade>
+                    <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:many-to-one>
         </jpa:attributes>
     </jpa:entity>
     <jpa:entity jaxb-root-element="false" static-metamodel="false" abstract="false" class="Vartotojas" visibile="true" minimized="false" id="_1448143179081">
         <jpa:attributes>
             <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814324007629">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
-                <jpa:generated-value strategy="AUTO"/>
+                <jpa:generated-value strategy="IDENTITY"/>
             </jpa:id>
             <jpa:basic name="vart_vardas" attribute-type="String" visibile="true" id="_144818591860050">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
@@ -51,10 +62,20 @@
             <jpa:basic name="pavardė" attribute-type="String" visibile="true" id="_144818592622654">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
             </jpa:basic>
-            <jpa:one-to-many name="megstamiausi" target-entity="Megstamiausias" collection-type="java.util.Collection" connected-entity-id="_1448143209918" visibile="true" id="_144883764848848">
+            <jpa:one-to-many name="komentarai" target-entity="Komentaras" mapped-by="vartotojas" collection-type="java.util.Collection" connected-entity-id="_1448143013829" connected-attribute-id="_144939378633116" visibile="true" id="_144939378633617">
                 <jpa:join-table/>
                 <jpa:cascade>
-                    <jpa:cascade-all/>
+                    <jpa:cascade-persist/>
+                    <jpa:cascade-merge/>
+                    <jpa:cascade-refresh/>
+                </jpa:cascade>
+            </jpa:one-to-many>
+            <jpa:one-to-many name="megstamiausi" target-entity="Megstamiausias" mapped-by="vartotojas" collection-type="java.util.Collection" connected-entity-id="_1448143209918" connected-attribute-id="_144939383135820" visibile="true" id="_144939383136121">
+                <jpa:join-table/>
+                <jpa:cascade>
+                    <jpa:cascade-persist/>
+                    <jpa:cascade-merge/>
+                    <jpa:cascade-refresh/>
                 </jpa:cascade>
             </jpa:one-to-many>
         </jpa:attributes>
@@ -63,7 +84,7 @@
         <jpa:attributes>
             <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814322462526">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
-                <jpa:generated-value strategy="AUTO"/>
+                <jpa:generated-value strategy="IDENTITY"/>
             </jpa:id>
             <jpa:basic name="pavadinimas" attribute-type="String" visibile="true" id="_144814339938333">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
@@ -71,16 +92,20 @@
             <jpa:basic name="išleista" attribute-type="java.sql.Date" visibile="true" id="_144814341385334">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
             </jpa:basic>
-            <jpa:one-to-many name="serijos" target-entity="Serija" collection-type="java.util.Collection" connected-entity-id="_1448143199033" visibile="true" id="_144883068064716">
+            <jpa:one-to-many name="serijos" target-entity="Serija" mapped-by="serialas" collection-type="java.util.Collection" connected-entity-id="_1448143199033" connected-attribute-id="_144939401120125" visibile="true" id="_144939401120226">
                 <jpa:join-table/>
                 <jpa:cascade>
-                    <jpa:cascade-all/>
+                    <jpa:cascade-persist/>
+                    <jpa:cascade-merge/>
+                    <jpa:cascade-refresh/>
                 </jpa:cascade>
             </jpa:one-to-many>
-            <jpa:one-to-many name="zanrai" target-entity="Zanras" collection-type="java.util.Collection" connected-entity-id="_1448143122623" visibile="true" id="_144883783419550">
+            <jpa:one-to-many name="zanrai" target-entity="Zanras" mapped-by="serialas" collection-type="java.util.Collection" connected-entity-id="_1448143122623" connected-attribute-id="_144939403139027" visibile="true" id="_144939403139128">
                 <jpa:join-table/>
                 <jpa:cascade>
-                    <jpa:cascade-all/>
+                    <jpa:cascade-persist/>
+                    <jpa:cascade-merge/>
+                    <jpa:cascade-refresh/>
                 </jpa:cascade>
             </jpa:one-to-many>
         </jpa:attributes>
@@ -89,7 +114,7 @@
         <jpa:attributes>
             <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814322830527">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
-                <jpa:generated-value strategy="AUTO"/>
+                <jpa:generated-value strategy="IDENTITY"/>
             </jpa:id>
             <jpa:basic name="aprašymas" attribute-type="String" visibile="true" id="_144814345927435">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
@@ -100,10 +125,19 @@
             <jpa:basic name="pavadinimas" attribute-type="String" visibile="true" id="_144814346213537">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
             </jpa:basic>
-            <jpa:one-to-many name="komentarai" target-entity="Komentaras" collection-type="java.util.Collection" connected-entity-id="_1448143013829" visibile="true" id="_144883771404349">
+            <jpa:many-to-one name="serialas" target-entity="Serialas" optional="true" primaryKey="false" connected-entity-id="_1448143188787" connected-attribute-id="_144939401120226" visibile="true" id="_144939401120125">
+                <jpa:join-column name="Serialas" referenced-column-name="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
                 <jpa:join-table/>
                 <jpa:cascade>
                     <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:many-to-one>
+            <jpa:one-to-many name="komentarai" target-entity="Komentaras" mapped-by="serija" collection-type="java.util.Collection" connected-entity-id="_1448143013829" connected-attribute-id="_144939380229618" visibile="true" id="_144939380230019">
+                <jpa:join-table/>
+                <jpa:cascade>
+                    <jpa:cascade-persist/>
+                    <jpa:cascade-merge/>
+                    <jpa:cascade-refresh/>
                 </jpa:cascade>
             </jpa:one-to-many>
         </jpa:attributes>
@@ -112,9 +146,15 @@
         <jpa:attributes>
             <jpa:id name="id" attribute-type="Long" visibile="true" id="_144814323446628">
                 <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
-                <jpa:generated-value strategy="AUTO"/>
+                <jpa:generated-value strategy="IDENTITY"/>
             </jpa:id>
-            <jpa:many-to-one name="serialas" target-entity="Serialas" optional="true" primaryKey="true" connected-entity-id="_1448143188787" visibile="true" id="_144819656944088">
+            <jpa:many-to-one name="vartotojas" target-entity="Vartotojas" optional="true" primaryKey="false" connected-entity-id="_1448143179081" connected-attribute-id="_144939383136121" visibile="true" id="_144939383135820">
+                <jpa:join-table/>
+                <jpa:cascade>
+                    <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:many-to-one>
+            <jpa:many-to-one name="serialas" target-entity="Serialas" optional="true" primaryKey="false" connected-entity-id="_1448143188787" visibile="true" id="_144939399090024">
                 <jpa:join-table/>
                 <jpa:cascade>
                     <jpa:cascade-all/>
@@ -125,22 +165,22 @@
     <jpa:diagram id="_144814298348514">
         <plane elementRef="_144814298348513" id="_144814298348515_p">
             <shape elementRef="_1448143013829" id="_1448143013829_gui">
-                <Bounds x="152.0" y="-145.0" width="178.0" height="118.0"/>
+                <Bounds x="152.0" y="-145.0" width="178.0" height="138.0"/>
             </shape>
             <shape elementRef="_1448143122623" id="_1448143122623_gui">
-                <Bounds x="451.0" y="-115.0" width="143.0" height="86.0"/>
+                <Bounds x="451.0" y="-115.0" width="143.0" height="118.0"/>
             </shape>
             <shape elementRef="_1448143179081" id="_1448143179081_gui">
-                <Bounds x="40.0" y="82.0" width="167.0" height="198.0"/>
+                <Bounds x="16.0" y="79.0" width="167.0" height="218.0"/>
             </shape>
             <shape elementRef="_1448143188787" id="_1448143188787_gui">
                 <Bounds x="498.0" y="46.0" width="150.0" height="158.0"/>
             </shape>
             <shape elementRef="_1448143199033" id="_1448143199033_gui">
-                <Bounds x="277.0" y="26.0" width="133.0" height="158.0"/>
+                <Bounds x="277.0" y="26.0" width="133.0" height="178.0"/>
             </shape>
             <shape elementRef="_1448143209918" id="_1448143209918_gui">
-                <Bounds x="256.0" y="236.0" width="208.0" height="86.0"/>
+                <Bounds x="290.0" y="238.0" width="208.0" height="106.0"/>
             </shape>
         </plane>
     </jpa:diagram>

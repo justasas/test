@@ -6,7 +6,7 @@
 package NoSQLvsSQL;
 
 import orm.Komentaras;
-import orm.Megstamiausi;
+import orm.Megstamiausias;
 import orm.Serialas;
 import orm.Serija;
 import orm.Vartotojas;
@@ -27,11 +27,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class SqlDB {
     public List<Vartotojas> vartotojai;
     public List<Serialas> serialai;
-    public List<Serija> serijos;
-    public List<Zanras> zanrai;
-    public List<Komentaras> komentarai;
-    public List<Megstamiausi> megstamiausi;
-        
+    
     private Random rand = new Random();
     private int tekstoEilutesIlgis = 20;
     private int aprasymoIlgis = 100;    
@@ -53,51 +49,72 @@ public class SqlDB {
         
         vartotojai = new ArrayList<>();
         serialai = new ArrayList<>();
-        serijos = new ArrayList<>();
-        zanrai = new ArrayList<>();
-        komentarai = new ArrayList<>();
-        megstamiausi = new ArrayList<>();
     }
     
     public void generuotiDuomenis() throws ParseException {
-        // vartotoju generavimas
-        for(int i = 0 ; i < vartotojuKiekis; i++)
-            vartotojai.add(generuotiVartotoja());
-
         // serialu generavimas
         for(int i = 0 ; i < serialuKiekis; i++)
         {
             Serialas serialas = generuotiSeriala();
-            
             generuotiSerijas(serialas);
             generuotiZanrus(serialas);
-
             serialai.add(serialas);
+        }
+        
+        // vartotoju ir megstamiausiu serialu generavimas
+        for(int i = 0 ; i < vartotojuKiekis; i++)
+        {
+            Vartotojas vartotojas = generuotiVartotoja();
+            vartotojai.add(vartotojas);
+            
+            List<Megstamiausias> megstamiausi = new ArrayList<>();
+            for(int j = 0; j < megstamiausiuKiekis; j++)
+            {
+                Megstamiausias megstamiausias = generuotiMegstamiausia(serialai.get(rand.nextInt(serialuKiekis)), vartotojas);
+                megstamiausi.add(megstamiausias);
+            }
+            vartotojas.setMegstamiausi(megstamiausi); 
+        }
+     
+        // uzpildoma komentarais
+        for(Serialas serialas : serialai)
+        {
+            for(Serija serija : serialas.getSerijos())
+            {
+                List<Komentaras> komentaruSarasas = new ArrayList<>();       
+                for(int k = 0; k < komentaruKiekisSerijai; k++)
+                {
+                    Komentaras komentaras = generuotiKomentara(vartotojai.get(rand.nextInt(vartotojuKiekis)), serija);
+                    komentaruSarasas.add(komentaras);
+                }
+                serija.setKomentarai(komentaruSarasas);
+            }
         }
     }
 
     private void generuotiZanrus(Serialas serialas)
     {
+        List<Zanras> zanrai = new ArrayList<>();
         for(int z = 0; z < zanruKiekisSerialui; z++)
         {
             Zanras zanras = generuotiZanra(serialas);
+            zanras.setSerialas(serialas);
             zanrai.add(zanras);
         }
+        serialas.setZanrai(zanrai);
     }
     
     private void generuotiSerijas(Serialas serialas)
     {
+        List<Serija> serijuSarasas = new ArrayList<>();
+ 
         for(int i = 0; i < serijuKiekisSerialui; i++)
         {
-            Serija serija = generuotiSerija(serialas);
-            serijos.add(serija);
-            for(int k = 0; k < komentaruKiekisSerijai; k++)
-            {
-                Komentaras komentaras;
-                komentaras = generuotiKomentara(serija, vartotojai.get(rand.nextInt(vartotojuKiekis)));
-                komentarai.add(komentaras);
-            }
+            Serija serija = generuotiSerija();
+            serija.setSerialas(serialas);
+            serijuSarasas.add(serija);
         }
+        serialas.setSerijos(serijuSarasas);
     }
     
     public Vartotojas generuotiVartotoja()
@@ -123,42 +140,42 @@ public class SqlDB {
         return serialas;
     }
 
-    private Serija generuotiSerija(Serialas serialas) {
+    private Serija generuotiSerija() {
         Serija s = new Serija();
         s.setPavadinimas(getRandomString(tekstoEilutesIlgis));
         s.setAprašymas(getRandomString(aprasymoIlgis));
-        s.setSerialas(serialas);
         return s;
     }
     
-    private Komentaras generuotiKomentara(Serija serija, Vartotojas vart)
+    private Komentaras generuotiKomentara(Vartotojas vart, Serija serija)
     {
         Komentaras k = new Komentaras();
         
         k.setTurinys(getRandomString(aprasymoIlgis));
         k.setVartotojas(vart);
         k.setSerija(serija);
-
+        
+        if(vart.getKomentarai() == null)
+        {
+            vart.setKomentarai(new ArrayList());
+        }
+        vart.getKomentarai().add(k);
+        
         return k;
     }
 
-    private Megstamiausi generuotiMegstamiausia(Serialas serialas, Vartotojas vart)
+    private Megstamiausias generuotiMegstamiausia(Serialas serialas, Vartotojas vartotojas)
     {
-        Megstamiausi m = new Megstamiausi();
-        
+        Megstamiausias m = new Megstamiausias();
         m.setSerialas(serialas);
-        m.setVartotojas(vart);
-
+        m.setVartotojas(vartotojas);
         return m;
     }
 
     private Zanras generuotiZanra(Serialas serialas)
     {
         Zanras z = new Zanras();
-        
         z.setPavadinimas(getRandomString(tekstoEilutesIlgis));
-        z.setSerialas(serialas);
-        
         return z;
     }
         

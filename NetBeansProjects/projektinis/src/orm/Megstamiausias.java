@@ -1,6 +1,5 @@
 package orm;
 
-
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,12 +13,14 @@ import javax.persistence.ManyToOne;
 public class Megstamiausias implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Id
     @ManyToOne(cascade = {CascadeType.ALL}, targetEntity = Serialas.class)
     private Serialas serialas;
+
+    @ManyToOne(cascade = {CascadeType.ALL}, targetEntity = Vartotojas.class)
+    private Vartotojas vartotojas;
 
     public Megstamiausias() {
 
@@ -39,5 +40,13 @@ public class Megstamiausias implements Serializable {
 
     public void setSerialas(Serialas serialas) {
         this.serialas = serialas;
+    }
+
+    public Vartotojas getVartotojas() {
+        return this.vartotojas;
+    }
+
+    public void setVartotojas(Vartotojas vartotojas) {
+        this.vartotojas = vartotojas;
     }
 }
